@@ -12,14 +12,32 @@
         <property name="connection.username">stand</property>
         <property name="connection.password">stand</property>
 
-        <property name="cache.provider_class">org.hibernate.cache.HashtableCacheProvider</property>
 
         <property name="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+
+<!-- If using Hibernate, add to your hibernate.cfg.xml -->
+        <property name="hibernate.cache.use_second_level_cache">true</property>
+        <property name="hibernate.cache.use_query_cache">true</property>
+
+        <property name="hibernate.cache.region.factory_class">org.hibernate.cache.infinispan.InfinispanRegionFactory</property>
+
         <property name="current_session_context_class">thread</property>
         <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.cache.infinispan.cfg">infinispan-configs.xml</property>
+
+        <property name="hibernate.cache.infinispan.entity.eviction.strategy">LRU</property>
+        <property name="hibernate.cache.infinispan.entity.eviction.wake_up_interval">2000</property>
+        <property name="hibernate.cache.infinispan.entity.eviction.max_entries">5000</property>
+        <property name="hibernate.cache.infinispan.entity.expiration.lifespan">60000</property>
+        <property name="hibernate.cache.infinispan.entity.expiration.max_idle">30000</property>
+        <property name="hibernate.cache.infinispan.entity.eviction.max_entries">5000</property>
 
 
-        <mapping class="com.kkey.entity.EntityObject" />
+        <!-- Drop and re-create the database schema on startup -->
+        <property name="hbm2ddl.auto">create</property>
+
+        <mapping class="com.kkey.entity.EntityObjectSub" />
+        <mapping class="com.kkey.entity.EntityObjectSubSub" />
     </session-factory>
 
 </hibernate-configuration>
