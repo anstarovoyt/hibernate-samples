@@ -5,9 +5,8 @@ import java.util.concurrent.Callable;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 
 import com.google.common.base.Throwables;
 
@@ -24,11 +23,9 @@ public class HibernateUtils
     {
         try
         {
-            Configuration configuration = new Configuration();
+            Configuration configuration = new AnnotationConfiguration();
             configuration.configure();
-            ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
-                    configuration.getProperties()).build();
-            sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+            sessionFactory = configuration.buildSessionFactory();
 
         }
         catch (Throwable ex)
