@@ -12,12 +12,21 @@
         <property name="connection.username">stand</property>
         <property name="connection.password">stand</property>
 
+        <property name="hibernate.transaction.auto_close_session">false</property>
+
+        <property name="hibernate.bytecode.use_reflection_optimizer">true</property>
+
+        <property name="hibernate.cache.region.factory_class">
+
+         net.sf.ehcache.hibernate.SingletonEhCacheRegionFactory</property>
 
         <property name="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
 
+        <property name="hibernate.cache.provider_configuration_file_resource_path">/ehcache.xml</property>
+
 <!-- If using Hibernate, add to your hibernate.cfg.xml -->
-        <property name="hibernate.cache.use_second_level_cache">false</property>
-        <property name="hibernate.cache.use_query_cache">false</property>
+        <property name="hibernate.cache.use_second_level_cache">true</property>
+        <property name="hibernate.cache.use_query_cache">true</property>
 
         <property name="current_session_context_class">thread</property>
         <property name="hibernate.show_sql">true</property>
@@ -28,7 +37,6 @@
         <property name="hbm2ddl.auto">create</property>
 
         <mapping class="com.kkey.entity.EntityObjectSub" />
-        <mapping class="com.kkey.entity.EntityObjectSubSub" />
     </session-factory>
 
 </hibernate-configuration>
