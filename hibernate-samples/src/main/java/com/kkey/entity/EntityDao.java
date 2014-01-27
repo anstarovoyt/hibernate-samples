@@ -37,7 +37,7 @@ public final class EntityDao
                 Session currentSession = HibernateUtils.getCurrentSession();
                 EntityObject loaded = (EntityObject)currentSession.load(EntityObjectSub.class, id);
 
-                loaded.setSomeValue(String.valueOf(App.RND.nextInt()));
+                loaded.setSomeValue(String.valueOf(App.rnd.nextInt()));
                 currentSession.saveOrUpdate(loaded);
                 currentSession.flush();
 

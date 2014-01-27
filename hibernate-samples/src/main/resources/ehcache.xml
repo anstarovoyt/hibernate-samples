@@ -56,7 +56,7 @@
         eternal="false"
         timeToIdleSeconds="120"
         timeToLiveSeconds="120"
-        overflowToDisk="true"
+        overflowToDisk="false"
         />
 
     <!--Predefined caches.  Add your cache configuration settings here.

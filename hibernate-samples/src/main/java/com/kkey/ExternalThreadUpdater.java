@@ -2,42 +2,39 @@ package com.kkey;
 
 import org.hibernate.Session;
 
-import com.google.common.base.Throwables;
 import com.kkey.entity.EntityObjectSub;
 
 /**
  * @author astarovoyt
  *
  */
-public class MultiThreadTestCase
+public class ExternalThreadUpdater
 {
 
-    public void startNewThreadUpdate(final long id)
+    public Thread startNewThreadUpdate(final Long[] ids)
     {
         Thread thread = new Thread(new Runnable()
         {
+            @Override
             public void run()
             {
-                doAction(id);
+                for (Long id : ids)
+                {
+                    doAction(id);
+                }
             }
 
         });
         thread.start();
 
-        try
-        {
-            thread.join();
-        }
-        catch (InterruptedException e)
-        {
-            Throwables.propagate(e);
-        }
+        return thread;
     }
 
     private void doAction(final long id)
     {
         HibernateUtils.doInTransaction(new Runnable()
         {
+            @Override
             public void run()
             {
                 updateEntity(id);
@@ -51,8 +48,8 @@ public class MultiThreadTestCase
         Session currentSession = HibernateUtils.getCurrentSession();
         EntityObjectSub loaded = (EntityObjectSub)currentSession.load(EntityObjectSub.class, id);
 
-        loaded.setSomeValue(String.valueOf(App.RND.nextInt()));
-        loaded.setSomeValue2(String.valueOf(App.RND.nextInt()));
+        loaded.setSomeValue(String.valueOf(App.rnd.nextInt()));
+        loaded.setSomeValue2(String.valueOf(App.rnd.nextInt()));
         currentSession.saveOrUpdate(loaded);
         currentSession.flush();
     }
