@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.CountDownLatch;
 
 import com.google.common.base.Throwables;
 import com.google.common.collect.Lists;
@@ -17,6 +18,9 @@ public class App
 {
     private static final int ENTITY_COUNT = 10000;
 
+    private static final int COUNT_UPDATE = 3;
+    private static final int COUNT_CREATE = 2;
+
     public static final Random rnd = new Random();
 
     public static void main(String[] args) throws IOException
@@ -26,9 +30,13 @@ public class App
 
     public static void start()
     {
-        List<Long> list = getEntityIds();
+        List<List<Long>> dataForUpdates = Lists.newArrayList();
 
-        List<Long> list2 = getEntityIds();
+        for (int i = 0; i < COUNT_UPDATE; i++)
+        {
+            dataForUpdates.add(getEntityIds());
+        }
+
         long currentTimeMillis = System.currentTimeMillis();
         try
         {
@@ -38,19 +46,23 @@ public class App
         }
         catch (InterruptedException e)
         {
+            Throwables.propagate(e);
         }
-        Thread thread = new ExternalThreadUpdater().startNewThreadUpdate(list.toArray(new Long[0]));
-        Thread thread2 = new ExternalThreadUpdater().startNewThreadUpdate(list2.toArray(new Long[0]));
 
-        for (int i = 0; i < ENTITY_COUNT; i++)
+        CountDownLatch latch = new CountDownLatch(COUNT_UPDATE + COUNT_CREATE);
+
+        for (int i = 0; i < COUNT_CREATE; i++)
         {
-            list.add(EntityDao.createEntity());
+            new ExternalEntityCreator().startNewThreadUpdate(ENTITY_COUNT, latch);
+        }
+        for (int i = 0; i < COUNT_UPDATE; i++)
+        {
+            new ExternalEntityUpdater().startNewThreadUpdate(dataForUpdates.get(i).toArray(new Long[0]), latch);
         }
 
         try
         {
-            thread.join();
-            thread2.join();
+            latch.await();
         }
         catch (InterruptedException e)
         {

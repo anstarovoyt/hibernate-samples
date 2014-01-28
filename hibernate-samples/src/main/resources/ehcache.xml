@@ -16,17 +16,5 @@
         </terracotta>
 	</defaultCache>
 
-    <cache
-        name="org.hibernate.cache.StandardQueryCache"
-        eternal="false"
-        memoryStoreEvictionPolicy="LFU"
-        timeToIdleSeconds="120"
-        timeToLiveSeconds="1200"
-        overflowToDisk="false"
-        maxElementsInMemory="5000"
-        statistics="true">
-        <terracotta clustered="false"/>
-    </cache>
-
 
 </ehcache>
