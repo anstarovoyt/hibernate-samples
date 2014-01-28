@@ -23,15 +23,10 @@
   -->
 <ehcache>
 
-    <diskStore path="java.io.tmpdir"/>
+    <diskStore path="java.io.tmpdir" />
 
-    <defaultCache
-        maxElementsInMemory="100000"
-        eternal="false"
-        timeToIdleSeconds="120"
-        timeToLiveSeconds="120"
-        overflowToDisk="false"
-        />
+    <defaultCache maxElementsInMemory="100000" eternal="false" timeToIdleSeconds="120" timeToLiveSeconds="120"
+        overflowToDisk="false" />
 
 
 

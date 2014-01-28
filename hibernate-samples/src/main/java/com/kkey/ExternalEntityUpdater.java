@@ -1,5 +1,7 @@
 package com.kkey;
 
+import java.util.concurrent.CountDownLatch;
+
 import org.hibernate.Session;
 
 import com.kkey.entity.EntityObjectSub;
@@ -8,10 +10,10 @@ import com.kkey.entity.EntityObjectSub;
  * @author astarovoyt
  *
  */
-public class ExternalThreadUpdater
+public class ExternalEntityUpdater
 {
 
-    public Thread startNewThreadUpdate(final Long[] ids)
+    public Thread startNewThreadUpdate(final Long[] ids, final CountDownLatch endFlag)
     {
         Thread thread = new Thread(new Runnable()
         {
@@ -22,6 +24,8 @@ public class ExternalThreadUpdater
                 {
                     doAction(id);
                 }
+
+                endFlag.countDown();
             }
 
         });
