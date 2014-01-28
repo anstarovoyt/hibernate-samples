@@ -29,7 +29,7 @@ public class App
         List<Long> list = getEntityIds();
 
         List<Long> list2 = getEntityIds();
-
+        long currentTimeMillis = System.currentTimeMillis();
         try
         {
             System.out.println("before update");
@@ -57,7 +57,7 @@ public class App
             Throwables.propagate(e);
         }
 
-        System.out.println("end");
+        System.out.println("end:" + (System.currentTimeMillis() - currentTimeMillis));
     }
 
     private static ArrayList<Long> getEntityIds()
