@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ehcache>
-	<diskStore path="java.io.tmpdir"/>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd">
+
+    <diskStore path="java.io.tmpdir" />
     <terracottaConfig url="/home/astarovoyt/Terracotta/tcconfig.xml" rejoin="true" />
 
-	<defaultCache
-		eternal="false"
-		timeToIdleSeconds="120"
-		timeToLiveSeconds="1200"
-        overflowToDisk="false"
-        statistics="true"
-        maxElementsInMemory="1000">
+    <defaultCache eternal="false" timeToIdleSeconds="120" timeToLiveSeconds="1200" overflowToDisk="false"
+        statistics="true" maxElementsInMemory="1000">
         <terracotta clustered="true" localCacheEnabled="true" consistency="strong">
-            <nonstop enabled="true"/>
+            <nonstop enabled="true" />
         </terracotta>
-	</defaultCache>
-
+    </defaultCache>
 
 </ehcache>

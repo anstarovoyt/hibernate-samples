@@ -18,7 +18,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @javax.persistence.Entity
 @Table(name = "entity")
 @Cacheable
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.TRANSACTIONAL)
 @DiscriminatorValue("S1")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "discr", discriminatorType = DiscriminatorType.STRING)
