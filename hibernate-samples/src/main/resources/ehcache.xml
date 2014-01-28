@@ -10,7 +10,7 @@
 		timeToLiveSeconds="1200"
         overflowToDisk="false"
         statistics="true"
-        maxElementsInMemory="10000">
+        maxElementsInMemory="1000">
         <terracotta clustered="true" localCacheEnabled="true" consistency="strong">
             <nonstop enabled="true"/>
         </terracotta>
