@@ -16,12 +16,11 @@
 
         <property name="hibernate.bytecode.use_reflection_optimizer">true</property>
 
-        <property name="hibernate.cache.region.factory_class">
-
-         net.sf.ehcache.hibernate.SingletonEhCacheRegionFactory</property>
+<!--         <property name="hibernate.cache.region.factory_class">net.sf.ehcache.hibernate.SingletonEhCacheRegionFactory</property> -->
 
         <property name="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
 
+        <property name="hibernate.cache.provider_class">net.sf.ehcache.hibernate.EhCacheProvider</property>
         <property name="hibernate.cache.provider_configuration_file_resource_path">/ehcache.xml</property>
 
 <!-- If using Hibernate, add to your hibernate.cfg.xml -->
