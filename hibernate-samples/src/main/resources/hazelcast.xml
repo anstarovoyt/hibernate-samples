@@ -27,8 +27,8 @@
         <join>
             <multicast enabled="false" />
             <tcp-ip enabled="true">
-                <member>localhost</member>
-<!--                 <member>192.168.225.220</member> -->
+                <member>192.168.224.83</member>
+                <member>192.168.225.220</member>
             </tcp-ip>
             <aws enabled="false" />
         </join>
