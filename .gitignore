@@ -24,3 +24,6 @@ local.properties
 # Idea
 .idea
 *.iml
+
+#Terracotta
+logs-127.0.1.1/**

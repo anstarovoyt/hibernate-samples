@@ -18,8 +18,8 @@ public class App
 {
     private static final int ENTITY_COUNT = 10000;
 
-    private static final int COUNT_UPDATE = 3;
-    private static final int COUNT_CREATE = 2;
+    private static final int COUNT_UPDATE = 4;
+    private static final int COUNT_CREATE = 3;
 
     public static final Random rnd = new Random();
 
