@@ -29,6 +29,7 @@
             <tcp-ip enabled="true">
                 <member>192.168.224.83</member>
                 <member>192.168.225.220</member>
+                <member>192.168.225.178</member>
             </tcp-ip>
             <aws enabled="false" />
         </join>
@@ -37,14 +38,15 @@
     <services enable-defaults="true" />
 
     <map name="default">
-        <in-memory-format>BINARY</in-memory-format>
+        <in-memory-format>OBJECT</in-memory-format>
         <backup-count>1</backup-count>
+        <async-backup-count>0</async-backup-count>
         <read-backup-data>true</read-backup-data>
 
         <max-idle-seconds>120</max-idle-seconds>
         <time-to-live-seconds>1200</time-to-live-seconds>
         <eviction-policy>LRU</eviction-policy>
-        <max-size policy="PER_NODE">100000</max-size>
+        <max-size policy="PER_NODE">200000</max-size>
         <eviction-percentage>25</eviction-percentage>
 
         <merge-policy>com.hazelcast.map.merge.PassThroughMergePolicy</merge-policy>

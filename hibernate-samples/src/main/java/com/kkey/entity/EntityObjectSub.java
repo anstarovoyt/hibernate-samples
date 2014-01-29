@@ -33,4 +33,11 @@ public class EntityObjectSub extends EntityObject
     {
         super(value);
     }
+
+    @Override
+    public String toString()
+    {
+        return "EntityObjectSub [getId()=" + getId() + ", getSomeValue()=" + getSomeValue() + ", getSomeValue2()="
+                + getSomeValue2() + "]";
+    }
 }

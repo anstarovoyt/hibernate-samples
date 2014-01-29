@@ -19,16 +19,20 @@ public class App
     private static final int ENTITY_COUNT = 10000;
 
     private static int COUNT_UPDATE = 4;
-    private static int COUNT_CREATE = 3;
+    private static int COUNT_CREATE = 4;
+
+    private static boolean ASYNC_UPDATE = true;
 
     public static final Random rnd = new Random();
 
     public static void main(String[] args) throws IOException
     {
-        if (args != null && args.length == 2)
+        if (args != null && args.length == 3)
         {
             COUNT_UPDATE = Integer.valueOf(args[0]);
             COUNT_CREATE = Integer.valueOf(args[1]);
+
+            ASYNC_UPDATE = !"select".equals(args[2].toLowerCase());
         }
 
         start();
@@ -47,7 +51,7 @@ public class App
         try
         {
             System.out.println("before update");
-            Thread.sleep(10000);
+            Thread.sleep(1000);
             System.out.println("start update");
         }
         catch (InterruptedException e)
@@ -76,6 +80,43 @@ public class App
         }
 
         System.out.println("end:" + (System.currentTimeMillis() - currentTimeMillis));
+
+        doAsync();
+    }
+
+    private static void doAsync()
+    {
+        new Thread(new Runnable()
+        {
+
+            @Override
+            public void run()
+            {
+                while (true)
+                {
+                    long maxId = EntityDao.getMaxId();
+                    if (ASYNC_UPDATE)
+                    {
+                        System.out.println("before: " + EntityDao.getEntity(maxId));
+                        EntityDao.updateEntity(maxId);
+                        System.out.println("after: " + EntityDao.getEntity(maxId));
+                    }
+                    else
+                    {
+                        System.out.println(EntityDao.getEntity(maxId));
+                    }
+
+                    try
+                    {
+                        Thread.sleep(10000);
+                    }
+                    catch (InterruptedException e)
+                    {
+                        Throwables.propagate(e);
+                    }
+                }
+            }
+        }).start();
     }
 
     private static ArrayList<Long> getEntityIds()
