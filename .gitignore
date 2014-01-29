@@ -27,3 +27,5 @@ local.properties
 
 #Terracotta
 logs-127.0.1.1/**
+*/logs-127.0.1.1/*
+
