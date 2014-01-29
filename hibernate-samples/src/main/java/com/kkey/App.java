@@ -18,13 +18,19 @@ public class App
 {
     private static final int ENTITY_COUNT = 10000;
 
-    private static final int COUNT_UPDATE = 4;
-    private static final int COUNT_CREATE = 3;
+    private static int COUNT_UPDATE = 4;
+    private static int COUNT_CREATE = 3;
 
     public static final Random rnd = new Random();
 
     public static void main(String[] args) throws IOException
     {
+        if (args != null && args.length == 2)
+        {
+            COUNT_UPDATE = Integer.valueOf(args[0]);
+            COUNT_CREATE = Integer.valueOf(args[1]);
+        }
+
         start();
     }
 
