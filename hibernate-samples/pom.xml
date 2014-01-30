@@ -111,17 +111,27 @@
         </dependency>
 
         <dependency>
-            <groupId>com.hazelcast</groupId>
-            <artifactId>hazelcast</artifactId>
-            <version>3.1.5</version>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache-core</artifactId>
+            <version>2.6.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache-terracotta</artifactId>
+            <version>2.6.6</version>
         </dependency>
         <dependency>
-            <groupId>com.hazelcast</groupId>
-            <artifactId>hazelcast-hibernate3</artifactId>
-            <version>3.1.5</version>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-ehcache</artifactId>
+            <version>3.3.1.GA</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>ehcache</artifactId>
+                    <groupId>net.sf.ehcache</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
-
-
     </dependencies>
 
 
@@ -129,4 +139,28 @@
 
     <dependencyManagement>
     </dependencyManagement>
+
+
+    <repositories>
+        <repository>
+            <id>terracotta-releases</id>
+            <url>http://www.terracotta.org/download/reflector/releases</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>terracotta-snapshots</id>
+            <url>http://www.terracotta.org/download/reflector/snapshots</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 </project>

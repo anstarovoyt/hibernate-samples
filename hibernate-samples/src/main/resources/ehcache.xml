@@ -7,8 +7,10 @@
 
     <defaultCache eternal="false" timeToIdleSeconds="120" timeToLiveSeconds="1200" overflowToDisk="false"
         statistics="true" maxElementsInMemory="1000">
-        <terracotta clustered="true" localCacheEnabled="true" consistency="strong">
-            <nonstop enabled="true" />
+        <terracotta clustered="true" localCacheEnabled="true" consistency="eventual" synchronousWrites="false">
+            <nonstop timeoutMillis="3000" enabled="true">
+                <timeoutBehavior type="localReads" />
+            </nonstop>
         </terracotta>
     </defaultCache>
 
